@@ -3,3 +3,13 @@
 
 # Ignore the qual_coder_env directory
 qual_coder_env/
+
+__pycache__/
+*.pyc
+
+# Ignore API keys
+.env
+
+# Ignore output files
+data/*.csv
+data/*.json
