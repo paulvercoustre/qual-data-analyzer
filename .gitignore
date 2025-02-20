@@ -1,0 +1,5 @@
+# Ignore the .python-version file
+.python-version
+
+# Ignore the qual_coder_env directory
+qual_coder_env/
