@@ -12,12 +12,8 @@ def test_process_interviews():
         "Interview 2": ["We struggle with funding."]
     }
     df = pd.DataFrame(mock_data, index=None)
-    
-    print(df)
 
     aggregated_codes, interview_codes = process_interviews(df, mock_llm)
-
-    print(aggregated_codes)
 
     assert "What challenges do you face?" in aggregated_codes
     assert "Example Code 1" in aggregated_codes["What challenges do you face?"]
