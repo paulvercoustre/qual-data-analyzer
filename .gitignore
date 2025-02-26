@@ -13,6 +13,6 @@ __pycache__/
 # Ignore output files
 data/*.csv
 data/*.json
-
+data*.xlsx
 
 .DS_Store
