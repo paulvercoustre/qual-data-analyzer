@@ -80,9 +80,3 @@ To run the unit tests, execute the following command from the project root direc
 ```bash
 pytest tests/
 ```
-
-## 🤝 Contributing
-*(Optional: Add contribution guidelines if applicable)*
-
-## 📄 License
-*(Optional: Add license information if applicable)*
