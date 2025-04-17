@@ -1,6 +1,6 @@
 import pandas as pd
 
-def process_interviews(df, llm_function):
+def process_interviews(df, model, llm_function):
     """
     Processes the interview data to generate codes.
     
@@ -35,13 +35,13 @@ def process_interviews(df, llm_function):
             
             # Get existing aggregated codes for this question
             existing_codes = aggregated_codes[question]
+            
             # Generate codes using the LLM function
-
-            codes = llm_function(question, response, existing_codes)
+            codes = llm_function(question, response, existing_codes, model)
 
             print(f"Question: \n {question} \n\n")
             print(f"Response: \n {response} \n\n")
-            print(f"Identified Codes: \n {codes} \n\n")
+            print(f"Identified codes in response: \n {codes} \n\n")
 
             # Add any new codes to the aggregated list (avoid duplicates)
             for code in codes:

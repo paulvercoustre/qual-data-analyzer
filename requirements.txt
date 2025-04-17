@@ -4,3 +4,6 @@ openpyxl
 python-dotenv
 pytest
 streamlit
+python-docx
+transformers
+torch

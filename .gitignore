@@ -10,9 +10,8 @@ __pycache__/
 # Ignore API keys
 .env
 
-# Ignore output files
-data/*.csv
-data/*.json
-data*.xlsx
+# Ignore files in data/, but keep directory structure via .gitkeep
+data/*
+!data/**/.gitkeep
 
 .DS_Store
