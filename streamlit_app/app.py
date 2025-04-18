@@ -7,21 +7,6 @@ import io # Needed for download button
 # --- Page Configuration (MUST BE FIRST Streamlit command) ---
 st.set_page_config(layout="wide", page_title="Qualitative Coder")
 
-# --- Custom CSS Injection ---
-st.markdown("""
-<style>
-    /* Reduce top padding for the main block */
-    .main .block-container {{ padding-top: 1rem; padding-bottom: 1rem; }}
-    /* Reduce title font size and top margin */
-    h1 {{
-        font-size: 1.8rem !important; 
-        margin-top: 0 !important; /* Attempt to remove top margin */
-        padding-top: 0 !important; /* Attempt to remove top padding */
-        margin-bottom: 0.5rem !important; /* Add a small bottom margin for spacing below title */
-    }}
-</style>
-""", unsafe_allow_html=True)
-
 # Add the project root to the Python path to allow importing from src
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if PROJECT_ROOT not in sys.path:
@@ -49,7 +34,7 @@ if 'error' not in st.session_state:
 if 'running_analysis' not in st.session_state:
     st.session_state.running_analysis = False
 
-# Title appears after config and CSS injection
+# Title appears after config
 st.title("Qualitative Coding Assistant")
 
 # --- Create Tabs ---
