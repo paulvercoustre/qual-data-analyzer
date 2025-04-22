@@ -1,20 +1,35 @@
+# Python specific
 # Ignore the .python-version file
 .python-version
-
-# Ignore the qual_coder_env directory
-qual_coder_env/
-
 __pycache__/
 *.pyc
+
+# Virtual Environment 
+qual_coder_env/
 
 # Ignore API keys
 .env
 
-# Ignore files in data/, but keep directory structure via .gitkeep
+# Ignore output files in data/, but keep directory structure via .gitkeep
 data/*
 !data/**/.gitkeep
 
+# OS specific
 .DS_Store
 
-# Ignore planning documents
+# Planning Documents
 docs/
+
+# Docker specific
+.dockerignore
+docker-compose.override.yml
+
+# Node specific (for frontend)
+frontend/node_modules/
+frontend/dist/
+frontend/.env*
+frontend/.eslintcache
+frontend/.vite
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

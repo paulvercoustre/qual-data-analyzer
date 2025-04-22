@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=qdasuser ## CHANGE ME ##
+      - POSTGRES_PASSWORD=qdaspassword ## CHANGE ME ##
+      - POSTGRES_DB=qdasdb ## CHANGE ME ##
+    ports:
+      - "5433:5432" # Expose on host port 5433 to avoid conflicts
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U qdasuser -d qdasdb"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+
+  broker:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://qdasuser:qdaspassword@db:5432/qdasdb ## CHANGE ME (match db env) ##
+      - CELERY_BROKER_URL=redis://broker:6379/0
+      - CELERY_RESULT_BACKEND=redis://broker:6379/0
+      # Add other env vars like LLM API keys here later, preferably via .env file
+    depends_on:
+      db: 
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+    # env_file: # Consider using this later for secrets
+    #   - .env 
+
+  worker:
+    build:
+      context: ./backend
+    # Command to start celery worker (adjust path/app name as needed)
+    # Example: celery -A your_celery_app_module worker --loglevel=info
+    # Needs celery installed in backend/requirements.txt
+    command: echo "Celery worker setup needed" # Placeholder command
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgresql://qdasuser:qdaspassword@db:5432/qdasdb ## CHANGE ME (match db env) ##
+      - CELERY_BROKER_URL=redis://broker:6379/0
+      - CELERY_RESULT_BACKEND=redis://broker:6379/0
+      # Add other env vars like LLM API keys here later, preferably via .env file
+    depends_on:
+      backend: # Worker often depends on the main app code
+        condition: service_started # Or specific healthcheck if backend has one
+      broker:
+        condition: service_healthy
+    # env_file:
+    #   - .env
+
+  frontend:
+    # We will build the frontend image later using a frontend/Dockerfile
+    # For now, use a base Node image to run commands like install/dev server
+    image: node:18-alpine 
+    working_dir: /app/frontend
+    volumes:
+      # Mount the entire frontend directory
+      - ./frontend:/app/frontend 
+      # Named volume for node_modules to persist them outside container layers
+      - frontend_node_modules:/app/frontend/node_modules 
+    ports:
+      # Standard Vite port
+      - "5173:5173"
+    # Default command can be overridden (e.g., to run npm install, npm run dev)
+    # command: npm run dev -- --host # Example for running dev server
+    command: tail -f /dev/null # Keep container running 
+
+volumes:
+  postgres_data:
+  redis_data:
+  frontend_node_modules: 
