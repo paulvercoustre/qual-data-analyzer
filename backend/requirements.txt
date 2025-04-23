@@ -1,2 +1,19 @@
 fastapi
-uvicorn[standard] 
+uvicorn[standard]
+
+# Database
+sqlalchemy
+psycopg2-binary
+alembic
+
+# Auth
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+
+# Config
+python-dotenv
+pydantic[email]
+pydantic-settings
+
+# For loading settings from env vars/dotenv 

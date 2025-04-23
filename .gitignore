@@ -1,11 +1,70 @@
+# Environment variables
+.env
+
+# IDE specific
+.vscode/
+.idea/
+
 # Python specific
 # Ignore the .python-version file
 .python-version
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Virtual Environment 
+# Virtual environment
+venv/
 qual_coder_env/
+.venv/
+ENV/
+env/
+
+# Docker specific
+postgres_data/
+redis_data/
+
+# Node specific
+frontend/node_modules/
+frontend/dist/
+frontend/.pnp.js
+frontend/.yarn/install-state.gz
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+*.cover
+
+# Other
+.env.*.local
+.env.local
 
 # Ignore API keys
 .env
@@ -13,9 +72,6 @@ qual_coder_env/
 # Ignore output files in data/, but keep directory structure via .gitkeep
 data/*
 !data/**/.gitkeep
-
-# OS specific
-.DS_Store
 
 # Planning Documents
 docs/
