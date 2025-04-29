@@ -17,8 +17,8 @@ sys.path.insert(0, APP_DIR)
 # --- Import Base and models ---
 # Import your Base metadata and all models here so Alembic autogenerate can see them
 from app.database import Base # Import Base from your database setup
-from app.models import user # Import all model modules
-# Add imports for other models here (e.g., from app.models import project, etc.)
+from app.models import user # Import user model module
+from app.models import project # Import project model module
 # ---
 
 # this is the Alembic Config object, which provides

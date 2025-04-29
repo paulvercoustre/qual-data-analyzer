@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware # Import CORS Middleware
 
 # Import routers
 from app.routers import auth
+from app.routers import users # Import the new users router
+from app.routers import projects # Import the new projects router
 
 app = FastAPI(title="QDAS Backend")
 
@@ -23,6 +25,8 @@ app.add_middleware(
 
 # Include routers
 app.include_router(auth.router, prefix="/auth")
+app.include_router(users.router) # Include the users router (prefix is defined in the router itself)
+app.include_router(projects.router) # Include the projects router (prefix is defined in the router itself)
 
 @app.get("/")
 async def read_root():

@@ -18,7 +18,8 @@ class User(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     # Define relationships if needed later (e.g., with projects)
-    # projects = relationship("Project", back_populates="owner")
+    projects = relationship("Project", back_populates="owner", cascade="all, delete-orphan")
+    # cascade="all, delete-orphan": If a user is deleted, their projects are also deleted.
 
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}')>" 
